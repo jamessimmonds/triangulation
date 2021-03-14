@@ -1,5 +1,7 @@
 import numpy as np
 
+from anticlockwise import sort
+
 # Is s within the circle cimcumscribing abc?
 def withinCircle(s, a, b, c):
     

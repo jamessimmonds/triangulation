@@ -1,7 +1,6 @@
 from determinant import withinCircle
 
 def triangulate(graph, enclosing_triangle):
-    # Algorithm
 
     triangles = [enclosing_triangle]
 
@@ -62,3 +61,5 @@ def triangulate(graph, enclosing_triangle):
                     
     for triangle in scaffolding:
         triangles.remove(triangle)
+
+    return triangles
