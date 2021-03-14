@@ -1,4 +1,5 @@
 from determinant import withinCircle
+from polygon import polygon
 
 def triangulate(graph, enclosing_triangle):
 
@@ -16,34 +17,14 @@ def triangulate(graph, enclosing_triangle):
                 badTriangles.append(triangle)
         
         # Find the boundaries of the polygonal hole
-        polygon = []
-        badEdges = []
-        
-        for triangle in badTriangles:
-            a, b, c = triangle
-            badEdges.append({a,b})
-            badEdges.append({b,c})
-            badEdges.append({a,c})
-        
-        frequencies = {}
-        
-        for edge in badEdges:
-            edge = tuple(edge)
-            if edge in frequencies.keys():
-                frequencies[edge] = frequencies[edge] + 1
-            else:
-                frequencies[edge] = 1
-                
-        for key, val in frequencies.items():
-            if val == 1:
-                polygon.append(key)
+        hole = polygon(badTriangles)
                 
         # Remove bad triangles from triangles
         for triangle in badTriangles:
             triangles.remove(triangle)
         
         # Re-triangulate the polygonal hole
-        for edge in polygon:
+        for edge in hole:
             a, b = edge
             newTriangle = {a, b, node}
             triangles.append(newTriangle)
